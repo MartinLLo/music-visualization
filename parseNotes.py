@@ -11,6 +11,26 @@ sciPitchRange = ["A0", "A#0", "B0", "C1", "C#1", "D1", "D#1", "E1", "F1", "F#1",
 
 colnames = ['Note_w_octave', 'Count']
 
+##def convertEnharmonics(pitch, octave):
+##    """
+##    Function to convert enharmonics (ex: double sharps, double flats, B#, C-) to the unaltered name
+##    (i.e., note without any accidentals) so it can be accurately mapped to the physical key
+##    played on the piano.
+##
+##    Input:
+##    Str: name of the pitch
+##    Int: octave number
+##    
+##    Output:
+##    Str: if enharmonic, scientific pitch notation of the unaltered note corresponding to the enharmonic.
+##         otherwise, the original note
+##    """
+##    if('##' in pitch):
+##        
+##
+##    else:
+##        return pitch + str(octave)
+    
 def noteToKey(note):
     """
     Function to convert scientific pitch notation to piano key number.
@@ -56,8 +76,9 @@ def countPitches(score):
     nameOctaveCount_list = [[i, nameOctaveCount[i]] for i in nameOctaveCount]
    # print(', '.join([str(p) for p in score.pitches]))
     nameOctaveCount_df = pd.DataFrame(nameOctaveCount_list, columns=colnames)
-    nameOctaveCount_df['Pitch'] = nameOctaveCount_df['Note_w_octave'].str.extract(r'([A-G][\#\-]*)')
+    nameOctaveCount_df['Pitch'] = nameOctaveCount_df['Note_w_octave'].str.extract(r'([A-G])')
     nameOctaveCount_df['Octave'] = nameOctaveCount_df['Note_w_octave'].str.extract(r'(\d)')
+    nameOctaveCount_df['Accidental'] = nameOctaveCount_df['Note_w_octave'].str.extract(r'([\#\-]+)')
     return nameOctaveCount_df
 
 def makeDataframe(score):
