@@ -1,3 +1,4 @@
+## Script to calculate pitch frequencies for a given piano score
 
 from music21 import *
 import os
@@ -22,7 +23,19 @@ def noteToKey(note):
     Output:
     Int: piano key number corresponding to the pitch, from 1 to 88
     """
-    if('-' in note):
+    if(('B#' in note) or ('E#' in note)):
+        shiftedNote = note.replace('#', '')
+        return sciPitchRange.index(shiftedNote) + 1
+    elif(('C-' in note) or ('F-' in note)):
+        shiftedNote = note.replace('-', '')
+        return sciPitchRange.index(shiftedNote) - 1
+    elif('##' in note):
+        shiftedNote = note.replace('##', '')
+        return sciPitchRange.index(shiftedNote) + 2
+    elif('--' in note):
+        shiftedNote = note.replace('--', '')
+        return sciPitchRange.index(shiftedNote) - 2
+    elif('-' in note):
        shiftedNote = note.replace('-', '')
        return sciPitchRange.index(shiftedNote)
     else:
@@ -38,9 +51,10 @@ def countPitches(score):
     Output:
     df: a dataframe with four columns (note name in scientific pitch notation, frequency, pitch, octave)
     """
-    #score.plot('histogram', 'pitch')
+    #score.plot('histogram', 'pitch', title = score.metadata.title)
     nameOctaveCount = analysis.pitchAnalysis.pitchAttributeCount(score, 'nameWithOctave')
     nameOctaveCount_list = [[i, nameOctaveCount[i]] for i in nameOctaveCount]
+   # print(', '.join([str(p) for p in score.pitches]))
     nameOctaveCount_df = pd.DataFrame(nameOctaveCount_list, columns=colnames)
     nameOctaveCount_df['Pitch'] = nameOctaveCount_df['Note_w_octave'].str.extract(r'([A-G][\#\-]*)')
     nameOctaveCount_df['Octave'] = nameOctaveCount_df['Note_w_octave'].str.extract(r'(\d)')
@@ -70,9 +84,18 @@ def makeDataframe(score):
 
     return df
 
-fur_elise = converter.parse(r'.\scores\Fur_Elise.mxl')
-#bday.show()
-df = makeDataframe(fur_elise)
+fur_elise = converter.parse(r'.\scores\Beethoven-Fur_Elise.mxl')
+#fur_elise.show()
+fur_elise_df = makeDataframe(fur_elise)
 
-print(df)
+#bday = converter.parse(r'.\scores\Happy_Birthday_v2.mxl') #something weird with this file - the counts are off
+#twinkle = converter.parse(r'.\scores\Twinkle_Twinkle_Little_Star_v2.mxl')
+
+moonlight_sonata = converter.parse(r'.\scores\Beethoven-Moonlight_Sonata.mxl')
+moonlight_sonata_df = makeDataframe(moonlight_sonata)
+
+df = pd.concat([fur_elise_df, moonlight_sonata_df])
+#print(df)
+
+df.to_csv("note_counts.csv", index = False)
 
