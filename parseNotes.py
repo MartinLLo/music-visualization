@@ -116,6 +116,11 @@ moonlight_sonata = converter.parse(r'.\scores\Beethoven-Moonlight_Sonata.mxl')
 moonlight_sonata_df = makeDataframe(moonlight_sonata)
 
 df = pd.concat([fur_elise_df, moonlight_sonata_df])
+# sort dataframe so that keys that are pressed the most are at the
+# bottom of the plot layers
+df.sort_values(by=['Composer', 'Title', 'Count'],
+               ascending=[True, True, False],
+               inplace=True)
 #print(df)
 
 df.to_csv("note_counts.csv", index = False)
