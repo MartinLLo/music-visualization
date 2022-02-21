@@ -11,26 +11,6 @@ sciPitchRange = ["A0", "A#0", "B0", "C1", "C#1", "D1", "D#1", "E1", "F1", "F#1",
 
 colnames = ['Note_w_octave', 'Count']
 
-##def convertEnharmonics(pitch, octave):
-##    """
-##    Function to convert enharmonics (ex: double sharps, double flats, B#, C-) to the unaltered name
-##    (i.e., note without any accidentals) so it can be accurately mapped to the physical key
-##    played on the piano.
-##
-##    Input:
-##    Str: name of the pitch
-##    Int: octave number
-##    
-##    Output:
-##    Str: if enharmonic, scientific pitch notation of the unaltered note corresponding to the enharmonic.
-##         otherwise, the original note
-##    """
-##    if('##' in pitch):
-##        
-##
-##    else:
-##        return pitch + str(octave)
-    
 def noteToKey(note):
     """
     Function to convert scientific pitch notation to piano key number.
@@ -93,29 +73,103 @@ def makeDataframe(score):
         key signature, and a conversion from scientific pitch notation to piano key number
     """
     title = score.metadata.title
+    movementName = score.metadata.movementName
     composer = score.metadata.composer
     keySignature = score.analyze('key').name
     print(score.metadata.all())
     
     df = countPitches(score)
-    df['Title'] = title
+    if((title == 'Rachmaninoff - Piano Concerto No. 2 in C minor (Op. 18)') | (title == 'Sonata I ')):
+        df['Title'] = movementName
+    else:
+        df['Title'] = title
     df['Composer'] = composer
     df['Key_signature'] = keySignature
     df['Piano_key_num'] = df['Note_w_octave'].apply(noteToKey)
 
     return df
 
+#bday = converter.parse(r'.\scores\Happy_Birthday_v2.mxl') #something weird with this file - the counts are off
+twinkle = converter.parse(r'.\scores\Twinkle_Twinkle_Little_Star_v2.mxl')
+twinkle_df = makeDataframe(twinkle)
+
 fur_elise = converter.parse(r'.\scores\Beethoven-Fur_Elise.mxl')
 #fur_elise.show()
 fur_elise_df = makeDataframe(fur_elise)
 
-#bday = converter.parse(r'.\scores\Happy_Birthday_v2.mxl') #something weird with this file - the counts are off
-#twinkle = converter.parse(r'.\scores\Twinkle_Twinkle_Little_Star_v2.mxl')
-
 moonlight_sonata = converter.parse(r'.\scores\Beethoven-Moonlight_Sonata.mxl')
 moonlight_sonata_df = makeDataframe(moonlight_sonata)
 
-df = pd.concat([fur_elise_df, moonlight_sonata_df])
+moonlight_sonata_1 = converter.parse(r'.\scores\Beethoven-Moonlight_Sonata_1st_Movement.mxl')
+moonlight_sonata_1_df = makeDataframe(moonlight_sonata_1)
+moonlight_sonata_2 = converter.parse(r'.\scores\Beethoven-Moonlight_Sonata_2nd_Movement.mxl')
+moonlight_sonata_2_df = makeDataframe(moonlight_sonata_2)
+moonlight_sonata_3 = converter.parse(r'.\scores\Beethoven-Moonlight_Sonata_3rd_Movement.mxl')
+moonlight_sonata_3_df = makeDataframe(moonlight_sonata_3)
+
+clair_de_lune = converter.parse(r'.\scores\Debussy-Clair_de_Lune.mxl')
+clair_df = makeDataframe(clair_de_lune)  # the key signature is incorrect - should be D- Major, not C# Major
+
+chopin_nocturne = converter.parse(r'.\scores\Chopin-Nocturne_Op_9_No_2.mxl')
+nocturne_df = makeDataframe(chopin_nocturne)
+
+pathetique_1 = converter.parse(r'.\scores\Beethoven_Sonate-Pathetique-1st-Movement.mxl')
+pathetique_1_df = makeDataframe(pathetique_1)
+pathetique_2 = converter.parse(r'.\scores\Beethoven_Sonate-Pathetique-2nd-Movement.mxl')
+pathetique_2_df = makeDataframe(pathetique_2)
+pathetique_3 = converter.parse(r'.\scores\Beethoven_Sonate-Pathetique-3rd-Movement.mxl')
+pathetique_3_df = makeDataframe(pathetique_3)
+
+campanella = converter.parse(r'.\scores\Liszt_La-Campanella.mxl')
+campanella_df = makeDataframe(campanella)
+
+rach_1 = converter.parse(r'.\scores\Rachmaninoff_Piano-Concerto-No-2-Op18-1st-Movement.mxl')
+rach_1_df = makeDataframe(rach_1)
+rach_2 = converter.parse(r'.\scores\Rachmaninoff_Piano-Concerto-No-2-Op18-2nd-Movement.mxl')
+rach_2_df = makeDataframe(rach_2)
+rach_3 = converter.parse(r'.\scores\Rachmaninoff_Piano-Concerto-No-2-Op18-3rd-Movement.mxl')
+rach_3_df = makeDataframe(rach_3)
+
+mozart_1 = converter.parse(r'.\scores\Mozart_Piano-Sonata-No-11-K331-1st-Movement.mxl')
+mozart_1_df = makeDataframe(mozart_1)
+mozart_2 = converter.parse(r'.\scores\Mozart_Piano-Sonata-No-11-K331-2nd-Movement.mxl')
+mozart_2_df = makeDataframe(mozart_2)
+mozart_3 = converter.parse(r'.\scores\Mozart_Piano-Sonata-No-11-K331-3rd-Movement.mxl')
+mozart_3_df = makeDataframe(mozart_3)
+
+liebestraum = converter.parse(r'.\scores\Liszt_Liebestraum.mxl')
+liebestraum_df = makeDataframe(liebestraum)
+
+minute_waltz = converter.parse(r'.\scores\Chopin_Minute-Waltz.mxl')
+minute_waltz_df = makeDataframe(minute_waltz)
+
+#Tchaikovsky piano concerto no 1
+
+gymnopedie = converter.parse(r'.\scores\Satie_Gymnopdie-No-1.mxl')
+gymnopedie_df = makeDataframe(gymnopedie)
+
+df = pd.concat([twinkle_df,
+                fur_elise_df,
+                moonlight_sonata_df,
+                moonlight_sonata_1_df,
+                moonlight_sonata_2_df,
+                moonlight_sonata_3_df,
+                clair_df,
+                nocturne_df,
+                pathetique_1_df,
+                pathetique_2_df,
+                pathetique_3_df,
+                campanella_df,
+                rach_1_df,
+                rach_2_df,
+                rach_3_df,
+                mozart_1_df,
+                mozart_2_df,
+                mozart_3_df,
+                liebestraum_df,
+                minute_waltz_df,
+                gymnopedie_df])
+
 # sort dataframe so that keys that are pressed the most are at the
 # bottom of the plot layers
 df.sort_values(by=['Composer', 'Title', 'Count'],
