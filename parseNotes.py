@@ -5,7 +5,6 @@ import os
 import pandas as pd
 
 os.chdir(r'C:\Users\Alice\Documents\Other Data Viz\PianoNotes')
-os.getcwd()
 
 sciPitchRange = ["A0", "A#0", "B0", "C1", "C#1", "D1", "D#1", "E1", "F1", "F#1", "G1", "G#1", "A1", "A#1", "B1", "C2", "C#2", "D2", "D#2", "E2", "F2", "F#2", "G2", "G#2", "A2", "A#2", "B2", "C3", "C#3", "D3", "D#3", "E3", "F3", "F#3", "G3", "G#3", "A3", "A#3", "B3", "C4", "C#4", "D4", "D#4", "E4", "F4", "F#4", "G4", "G#4", "A4", "A#4", "B4", "C5", "C#5", "D5", "D#5", "E5", "F5", "F#5", "G5", "G#5", "A5", "A#5", "B5", "C6", "C#6", "D6", "D#6", "E6", "F6", "F#6", "G6", "G#6", "A6", "A#6", "B6", "C7", "C#7", "D7", "D#7", "E7", "F7", "F#7", "G7", "G#7", "A7", "A#7", "B7", "C8"]
 
@@ -79,7 +78,7 @@ def makeDataframe(score):
     print(score.metadata.all())
     
     df = countPitches(score)
-    if((title == 'Rachmaninoff - Piano Concerto No. 2 in C minor (Op. 18)') | (title == 'Sonata I ')):
+    if((title == 'Rachmaninoff - Piano Concerto No. 2 in C minor (Op. 18)') | (title == 'Sonata I ') | ('Bach-WTC' in title)):
         df['Title'] = movementName
     else:
         df['Title'] = title
@@ -143,10 +142,116 @@ liebestraum_df = makeDataframe(liebestraum)
 minute_waltz = converter.parse(r'.\scores\Chopin_Minute-Waltz.mxl')
 minute_waltz_df = makeDataframe(minute_waltz)
 
-#Tchaikovsky piano concerto no 1
-
 gymnopedie = converter.parse(r'.\scores\Satie_Gymnopdie-No-1.mxl')
 gymnopedie_df = makeDataframe(gymnopedie)
+
+wtc_prelude_c_major = converter.parse(r'.\scores\Bach-WTC_Prelude_C_Major.mxl')
+wtc_prelude_c_major_df = makeDataframe(wtc_prelude_c_major)
+wtc_fugue_c_major = converter.parse(r'.\scores\Bach-WTC_Fugue_C_Major.mxl')
+wtc_fugue_c_major_df = makeDataframe(wtc_fugue_c_major)
+wtc_prelude_c_minor = converter.parse(r'.\scores\Bach-WTC_Prelude_C_Minor.mxl')
+wtc_prelude_c_minor_df = makeDataframe(wtc_prelude_c_minor)
+wtc_fugue_c_minor = converter.parse(r'.\scores\Bach-WTC_Fugue_C_Minor.mxl')
+wtc_fugue_c_minor_df = makeDataframe(wtc_fugue_c_minor)
+
+wtc_prelude_csharp_major = converter.parse(r'.\scores\Bach-WTC_Prelude_Csharp_Major.mxl')
+wtc_prelude_csharp_major_df = makeDataframe(wtc_prelude_csharp_major)
+wtc_fugue_csharp_major = converter.parse(r'.\scores\Bach-WTC_Fugue_Csharp_Major.mxl')
+wtc_fugue_csharp_major_df = makeDataframe(wtc_fugue_csharp_major)
+wtc_prelude_csharp_minor = converter.parse(r'.\scores\Bach-WTC_Prelude_Csharp_Minor.mxl')
+wtc_prelude_csharp_minor_df = makeDataframe(wtc_prelude_csharp_minor)
+wtc_fugue_csharp_minor = converter.parse(r'.\scores\Bach-WTC_Fugue_Csharp_Minor.mxl')
+wtc_fugue_csharp_minor_df = makeDataframe(wtc_fugue_csharp_minor)
+
+wtc_prelude_d_major = converter.parse(r'.\scores\Bach-WTC_Prelude_D_Major.mxl')
+wtc_prelude_d_major_df = makeDataframe(wtc_prelude_d_major)
+wtc_fugue_d_major = converter.parse(r'.\scores\Bach-WTC_Fugue_D_Major.mxl')
+wtc_fugue_d_major_df = makeDataframe(wtc_fugue_d_major)
+wtc_prelude_d_minor = converter.parse(r'.\scores\Bach-WTC_Prelude_D_Minor.mxl')
+wtc_prelude_d_minor_df = makeDataframe(wtc_prelude_d_minor)
+wtc_fugue_d_minor = converter.parse(r'.\scores\Bach-WTC_Fugue_D_Minor.mxl')
+wtc_fugue_d_minor_df = makeDataframe(wtc_fugue_d_minor)
+
+wtc_prelude_eflat_major = converter.parse(r'.\scores\Bach-WTC_Prelude_Eflat_Major.mxl')
+wtc_prelude_eflat_major_df = makeDataframe(wtc_prelude_eflat_major)
+wtc_fugue_eflat_major = converter.parse(r'.\scores\Bach-WTC_Fugue_Eflat_Major.mxl')
+wtc_fugue_eflat_major_df = makeDataframe(wtc_fugue_eflat_major)
+wtc_prelude_eflat_minor = converter.parse(r'.\scores\Bach-WTC_Prelude_Eflat_Minor.mxl')
+wtc_prelude_eflat_minor_df = makeDataframe(wtc_prelude_eflat_minor)
+wtc_fugue_dsharp_minor = converter.parse(r'.\scores\Bach-WTC_Fugue_Dsharp_Minor.mxl')
+wtc_fugue_dsharp_minor_df = makeDataframe(wtc_fugue_dsharp_minor)
+
+wtc_prelude_e_major = converter.parse(r'.\scores\Bach-WTC_Prelude_E_Major.mxl')
+wtc_prelude_e_major_df = makeDataframe(wtc_prelude_e_major)
+wtc_fugue_e_major = converter.parse(r'.\scores\Bach-WTC_Fugue_E_Major.mxl')
+wtc_fugue_e_major_df = makeDataframe(wtc_fugue_e_major)
+wtc_prelude_e_minor = converter.parse(r'.\scores\Bach-WTC_Prelude_E_Minor.mxl')
+wtc_prelude_e_minor_df = makeDataframe(wtc_prelude_e_minor)
+wtc_fugue_e_minor = converter.parse(r'.\scores\Bach-WTC_Fugue_E_Minor.mxl')
+wtc_fugue_e_minor_df = makeDataframe(wtc_fugue_e_minor)
+
+wtc_prelude_f_major = converter.parse(r'.\scores\Bach-WTC_Prelude_F_Major.mxl')
+wtc_prelude_f_major_df = makeDataframe(wtc_prelude_f_major)
+wtc_fugue_f_major = converter.parse(r'.\scores\Bach-WTC_Fugue_F_Major.mxl')
+wtc_fugue_f_major_df = makeDataframe(wtc_fugue_f_major)
+wtc_prelude_f_minor = converter.parse(r'.\scores\Bach-WTC_Prelude_F_Minor.mxl')
+wtc_prelude_f_minor_df = makeDataframe(wtc_prelude_f_minor)
+wtc_fugue_f_minor = converter.parse(r'.\scores\Bach-WTC_Fugue_F_Minor.mxl')
+wtc_fugue_f_minor_df = makeDataframe(wtc_fugue_f_minor)
+
+wtc_prelude_fsharp_major = converter.parse(r'.\scores\Bach-WTC_Prelude_Fsharp_Major.mxl')
+wtc_prelude_fsharp_major_df = makeDataframe(wtc_prelude_fsharp_major)
+wtc_fugue_fsharp_major = converter.parse(r'.\scores\Bach-WTC_Fugue_Fsharp_Major.mxl')
+wtc_fugue_fsharp_major_df = makeDataframe(wtc_fugue_fsharp_major)
+wtc_prelude_fsharp_minor = converter.parse(r'.\scores\Bach-WTC_Prelude_Fsharp_Minor.mxl')
+wtc_prelude_fsharp_minor_df = makeDataframe(wtc_prelude_fsharp_minor)
+wtc_fugue_fsharp_minor = converter.parse(r'.\scores\Bach-WTC_Fugue_Fsharp_Minor.mxl')
+wtc_fugue_fsharp_minor_df = makeDataframe(wtc_fugue_fsharp_minor)
+
+wtc_prelude_g_major = converter.parse(r'.\scores\Bach-WTC_Prelude_G_Major.mxl')
+wtc_prelude_g_major_df = makeDataframe(wtc_prelude_g_major)
+wtc_fugue_g_major = converter.parse(r'.\scores\Bach-WTC_Fugue_G_Major.mxl')
+wtc_fugue_g_major_df = makeDataframe(wtc_fugue_g_major)
+wtc_prelude_g_minor = converter.parse(r'.\scores\Bach-WTC_Prelude_G_Minor.mxl')
+wtc_prelude_g_minor_df = makeDataframe(wtc_prelude_g_minor)
+wtc_fugue_g_minor = converter.parse(r'.\scores\Bach-WTC_Fugue_G_Minor.mxl')
+wtc_fugue_g_minor_df = makeDataframe(wtc_fugue_g_minor)
+
+wtc_prelude_aflat_major = converter.parse(r'.\scores\Bach-WTC_Prelude_Aflat_Major.mxl')
+wtc_prelude_aflat_major_df = makeDataframe(wtc_prelude_aflat_major)
+wtc_fugue_aflat_major = converter.parse(r'.\scores\Bach-WTC_Fugue_Aflat_Major.mxl')
+wtc_fugue_aflat_major_df = makeDataframe(wtc_fugue_aflat_major)
+wtc_prelude_gsharp_minor = converter.parse(r'.\scores\Bach-WTC_Prelude_Gsharp_Minor.mxl')
+wtc_prelude_gsharp_minor_df = makeDataframe(wtc_prelude_gsharp_minor)
+wtc_fugue_gsharp_minor = converter.parse(r'.\scores\Bach-WTC_Fugue_Gsharp_Minor.mxl')
+wtc_fugue_gsharp_minor_df = makeDataframe(wtc_fugue_gsharp_minor)
+
+wtc_prelude_a_major = converter.parse(r'.\scores\Bach-WTC_Prelude_A_Major.mxl')
+wtc_prelude_a_major_df = makeDataframe(wtc_prelude_a_major)
+wtc_fugue_a_major = converter.parse(r'.\scores\Bach-WTC_Fugue_A_Major.mxl')
+wtc_fugue_a_major_df = makeDataframe(wtc_fugue_a_major)
+wtc_prelude_a_minor = converter.parse(r'.\scores\Bach-WTC_Prelude_A_Minor.mxl')
+wtc_prelude_a_minor_df = makeDataframe(wtc_prelude_a_minor)
+wtc_fugue_a_minor = converter.parse(r'.\scores\Bach-WTC_Fugue_A_Minor.mxl')
+wtc_fugue_a_minor_df = makeDataframe(wtc_fugue_a_minor)
+
+wtc_prelude_bflat_major = converter.parse(r'.\scores\Bach-WTC_Prelude_Bflat_Major.mxl')
+wtc_prelude_bflat_major_df = makeDataframe(wtc_prelude_bflat_major)
+wtc_fugue_bflat_major = converter.parse(r'.\scores\Bach-WTC_Fugue_Bflat_Major.mxl')
+wtc_fugue_bflat_major_df = makeDataframe(wtc_fugue_bflat_major)
+wtc_prelude_bflat_minor = converter.parse(r'.\scores\Bach-WTC_Prelude_Bflat_Minor.mxl')
+wtc_prelude_bflat_minor_df = makeDataframe(wtc_prelude_bflat_minor)
+wtc_fugue_bflat_minor = converter.parse(r'.\scores\Bach-WTC_Fugue_Bflat_Minor.mxl')
+wtc_fugue_bflat_minor_df = makeDataframe(wtc_fugue_bflat_minor)
+
+wtc_prelude_b_major = converter.parse(r'.\scores\Bach-WTC_Prelude_B_Major.mxl')
+wtc_prelude_b_major_df = makeDataframe(wtc_prelude_b_major)
+wtc_fugue_b_major = converter.parse(r'.\scores\Bach-WTC_Fugue_B_Major.mxl')
+wtc_fugue_b_major_df = makeDataframe(wtc_fugue_b_major)
+wtc_prelude_b_minor = converter.parse(r'.\scores\Bach-WTC_Prelude_B_Minor.mxl')
+wtc_prelude_b_minor_df = makeDataframe(wtc_prelude_b_minor)
+wtc_fugue_b_minor = converter.parse(r'.\scores\Bach-WTC_Fugue_B_Minor.mxl')
+wtc_fugue_b_minor_df = makeDataframe(wtc_fugue_b_minor)
 
 df = pd.concat([twinkle_df,
                 fur_elise_df,
@@ -168,7 +273,55 @@ df = pd.concat([twinkle_df,
                 mozart_3_df,
                 liebestraum_df,
                 minute_waltz_df,
-                gymnopedie_df])
+                gymnopedie_df,
+                wtc_prelude_c_major_df,
+                wtc_fugue_c_major_df,
+                wtc_prelude_c_minor_df,
+                wtc_fugue_c_minor_df,
+                wtc_prelude_csharp_major_df,
+                wtc_fugue_csharp_major_df,
+                wtc_prelude_csharp_minor_df,
+                wtc_fugue_csharp_minor_df,
+                wtc_prelude_d_major_df,
+                wtc_fugue_d_major_df,
+                wtc_prelude_d_minor_df,
+                wtc_fugue_d_minor_df,
+                wtc_prelude_eflat_major_df,
+                wtc_fugue_eflat_major_df,
+                wtc_prelude_eflat_minor_df,
+                wtc_fugue_dsharp_minor_df,
+                wtc_prelude_e_major_df,
+                wtc_fugue_e_major_df,
+                wtc_prelude_e_minor_df,
+                wtc_fugue_e_minor_df,
+                wtc_prelude_f_major_df,
+                wtc_fugue_f_major_df,
+                wtc_prelude_f_minor_df,
+                wtc_fugue_f_minor_df,
+                wtc_prelude_fsharp_major_df,
+                wtc_fugue_fsharp_major_df,
+                wtc_prelude_fsharp_minor_df,
+                wtc_fugue_fsharp_minor_df,
+                wtc_prelude_g_major_df,
+                wtc_fugue_g_major_df,
+                wtc_prelude_g_minor_df,
+                wtc_fugue_g_minor_df,
+                wtc_prelude_aflat_major_df,
+                wtc_fugue_aflat_major_df,
+                wtc_prelude_gsharp_minor_df,
+                wtc_fugue_gsharp_minor_df,
+                wtc_prelude_a_major_df,
+                wtc_fugue_a_major_df,
+                wtc_prelude_a_minor_df,
+                wtc_fugue_a_minor_df,
+                wtc_prelude_bflat_major_df,
+                wtc_fugue_bflat_major_df,
+                wtc_prelude_bflat_minor_df,
+                wtc_fugue_bflat_minor_df,
+                wtc_prelude_b_major_df,
+                wtc_fugue_b_major_df,
+                wtc_prelude_b_minor_df,
+                wtc_fugue_b_minor_df])
 
 # sort dataframe so that keys that are pressed the most are at the
 # bottom of the plot layers
