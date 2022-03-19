@@ -53,7 +53,7 @@ def countPitches(score):
     #score.plot('histogram', 'pitch', title = score.metadata.title)
     nameOctaveCount = analysis.pitchAnalysis.pitchAttributeCount(score, 'nameWithOctave')
     nameOctaveCount_list = [[i, nameOctaveCount[i]] for i in nameOctaveCount]
-   # print(', '.join([str(p) for p in score.pitches]))
+
     nameOctaveCount_df = pd.DataFrame(nameOctaveCount_list, columns=colnames)
     nameOctaveCount_df['Pitch'] = nameOctaveCount_df['Note_w_octave'].str.extract(r'([A-G])')
     nameOctaveCount_df['Octave'] = nameOctaveCount_df['Note_w_octave'].str.extract(r'(\d)')
@@ -88,12 +88,10 @@ def makeDataframe(score):
 
     return df
 
-#bday = converter.parse(r'.\scores\Happy_Birthday_v2.mxl') #something weird with this file - the counts are off
 twinkle = converter.parse(r'.\scores\Twinkle_Twinkle_Little_Star_v2.mxl')
 twinkle_df = makeDataframe(twinkle)
 
 fur_elise = converter.parse(r'.\scores\Beethoven-Fur_Elise.mxl')
-#fur_elise.show()
 fur_elise_df = makeDataframe(fur_elise)
 
 moonlight_sonata = converter.parse(r'.\scores\Beethoven-Moonlight_Sonata.mxl')
@@ -328,7 +326,6 @@ df = pd.concat([twinkle_df,
 df.sort_values(by=['Composer', 'Title', 'Count'],
                ascending=[True, True, False],
                inplace=True)
-#print(df)
 
 df.to_csv("note_counts.csv", index = False)
 
